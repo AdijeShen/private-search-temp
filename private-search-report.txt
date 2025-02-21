@@ -11,17 +11,17 @@ Settings:
 
 Preprocessing Cost:
 ** Storage (MB): 212.429688
-** Preparation Time (s): 2.639725
+** Preparation Time (s): 1.965514
 ** Offline Communication Cost Per Q (KB, amt.): 27173.906250
-** Amortized Maintainence Time Per Q (s): 0.114771
+** Amortized Maintainence Time Per Q (s): 0.085457
 
 Online Cost:
-** Average Computation Time Per Query (s): 0.055917
-** Average Total Time Per Q (s): 1.055917
+** Average Computation Time Per Query (s): 0.051029
+** Average Total Time Per Q (s): 1.051029
 ** Online Communication Per Q (KB): 2130.000000
 
 Quality:
-** Recall: 0.939501
+** Recall: 0.939000
 -----------------------
 -------------------------
 Private ANN Benchmarking w/ Go Frontend
@@ -36,15 +36,51 @@ Settings:
 
 Preprocessing Cost:
 ** Storage (MB): 212.429688
-** Preparation Time (s): 3.082467
+** Preparation Time (s): 1.778030
 ** Offline Communication Cost Per Q (KB, amt.): 27173.906250
-** Amortized Maintainence Time Per Q (s): 0.134020
+** Amortized Maintainence Time Per Q (s): 0.077306
 
 Online Cost:
-** Average Computation Time Per Query (s): 0.064044
-** Average Total Time Per Q (s): 1.064044
+** Average Computation Time Per Query (s): 0.045157
+** Average Total Time Per Q (s): 1.045157
 ** Online Communication Per Q (KB): 2130.000000
 
 Quality:
-** Recall: 0.954000
+** Recall: 0.932000
+-----------------------
+-------------------------
+Private ANN Benchmarking w/ Go Frontend
+Settings:
+** Vector Num: 1000000
+** DB Size (MB): 610.351562
+** Top K: 10
+** Rounds: 20
+** Parallel Exploration: 3
+** RTT (ms): 50
+** Window Size: 23
+
+Preprocessing Cost:
+** Storage (MB): 212.429688
+** Preparation Time (s): 2.179105
+** Offline Communication Cost Per Q (KB, amt.): 27173.906250
+** Amortized Maintainence Time Per Q (s): 0.094744
+
+Online Cost:
+** Average Computation Time Per Query (s): 0.057454
+** Average Total Time Per Q (s): 1.057454
+** Online Communication Per Q (KB): 2130.000000
+
+Quality:
+** Recall: 0.932000
+-----------------------
+-------------------------
+NGT Stats
+Settings:
+** Vector Num: 1000000
+** Top K: 10
+
+** Average Computation Time Per Query (s): 0.002164
+
+Quality:
+** Recall: 0.997600
 -----------------------

@@ -22,14 +22,14 @@ import (
 
 var syntheticTest bool
 var nonPrivateMode bool
-var vectors [][]float32
-var graph [][]int
-var queries [][]float32
-var n int
-var dim int
-var m int
-var k int
-var q int
+var vectors [][]float32 // input vectors
+var graph [][]int       // graph based on the vectors
+var queries [][]float32 // queries
+var n int               // number of vectors
+var dim int             // vector dimensions
+var m int               // neighbor number
+var k int               // top k result
+var q int               // query number
 
 var PIR *pianopir.SimpleBatchPianoPIR
 
@@ -140,7 +140,7 @@ func main() {
 			// in this case we need to generate the graph
 			log.Printf("Graph file %s does not exist. Generating the graph...\n", graphFileName)
 			start := time.Now()
-			graph = graphann.BuildGraph(n, dim, m, vectors, workingDir, dataset)
+			graph = graphann.BuildGraph(m, vectors, workingDir, dataset)
 			end := time.Now()
 			graphann.SaveGraphToFile(graphFileName, graph)
 			log.Printf("Graph generation time: %v\n", end.Sub(start))

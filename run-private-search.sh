@@ -13,10 +13,14 @@
 # -rtt 50: The round-trip time (RTT) in milliseconds between the client and the server.
 
 
-go run private-search.go -n 1000000 -d 128 -m 32 -k 10 -q 100 -input ./SIFT-dataset/bigann_base.bvecs -query ./SIFT-dataset/bigann_query.bvecs \
-                         -output ./private-search-result.txt -report ./private-search-report.txt -gnd ./SIFT-dataset/gnd/idx_1M.ivecs \
-                         -step 20 -parallel 3 -rtt 50
+# go run private-search.go -n 1000000 -d 128 -m 32 -k 10 -q 100 -input ./SIFT-dataset/bigann_base.bvecs -query ./SIFT-dataset/bigann_query.bvecs \
+#                          -output ./private-search-result.txt -report ./private-search-report.txt -gnd ./SIFT-dataset/gnd/idx_1M.ivecs \
+#                          -step 20 -parallel 3 -rtt 50
 
+
+go run private-search.go -n 1000000 -d 128 -m 32 -k 10 -q 100 -input ./SIFT-dataset/sift_base.fvecs -query ./SIFT-dataset/sift_query.fvecs \
+                         -output ./private-search-result.txt -report ./private-search-report.txt -gnd ./SIFT-dataset/sift_groundtruth.ivecs \
+                         -step 20 -parallel 3 -rtt 50
 
 #go run private-search.go -n 100000000 -d 128 -m 32 -k 10 -q 100 -input ./SIFT-dataset/bigann_base.bvecs -query ./SIFT-dataset/bigann_query.bvecs \
 #                         -output ./private-search-result.txt -gnd ./SIFT-dataset/gnd/idx_100M.ivecs \

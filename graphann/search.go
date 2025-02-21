@@ -80,6 +80,7 @@ func (f *GraphANNFrontend) Preprocess() {
 	f.StartVertices = v
 }
 
+// n, dim, m
 func (f *GraphANNFrontend) GetMetadata() (int, int, int) {
 	return f.Graph.GetMetadata()
 }

@@ -8,8 +8,6 @@ import (
 	"strconv"
 	"testing"
 	"time"
-
-	"github.com/evan176/hnswgo"
 )
 
 func TestDistance(t *testing.T) {
@@ -89,7 +87,7 @@ func TestBuildGraphAndSearch(t *testing.T) {
 		}
 	} else {
 		fmt.Println("Building graph")
-		graph = BuildGraph(n, dim, m, vectors, savepath, outputPrefix)
+		graph = BuildGraph(m, vectors, savepath, outputPrefix)
 		SaveGraphToFile(graphFile, graph)
 		fmt.Println("Graph built and saved to file")
 	}
@@ -114,7 +112,6 @@ func TestSearchQuality(t *testing.T) {
 	graphFile := savepath + outputPrefix + "_graph.npy"
 	queryFile := savepath + "bigann_query.bvecs"
 	gndFile := savepath + "gnd/idx_1M.ivecs"
-	hnswFile := savepath + outputPrefix + "_hnsw.bin"
 
 	// Load vectors from file
 	vectors, err := LoadBvecsFile(inputFile, n, dim)
@@ -135,7 +132,7 @@ func TestSearchQuality(t *testing.T) {
 		}
 	} else {
 		fmt.Println("Building graph")
-		graph = BuildGraph(n, dim, m, vectors, savepath, outputPrefix)
+		graph = BuildGraph(m, vectors, savepath, outputPrefix)
 		SaveGraphToFile(graphFile, graph)
 		fmt.Println("Graph built and saved to file")
 	}
@@ -179,37 +176,6 @@ func TestSearchQuality(t *testing.T) {
 
 	fmt.Println("Recall: ", recall)
 	fmt.Println("Average search time: ", end.Sub(start).Seconds()/float64(q), " seconds per query")
-
-	h := hnswgo.New(dim, m, 300, 100, uint32(n), "l2")
-
-	// only when the hnsw index file does not exist, we create a new hnsw index
-	if _, err := os.Stat(hnswFile); os.IsNotExist(err) {
-		fmt.Println("Creating HNSW index")
-		start := time.Now()
-		for i := 0; i < n; i++ {
-			h.AddPoint(vectors[i], uint32(i))
-		}
-		end := time.Now()
-		h.Save(hnswFile)
-		fmt.Println("HNSW index created, time = ", end.Sub(start))
-	} else {
-		h = hnswgo.Load(hnswFile, dim, "l2")
-		fmt.Println("Loaded HNSW index from file")
-	}
-
-	hnswAnswer := make([][]int, q)
-	// search using hnsw
-	for i := 0; i < q; i++ {
-		ans, _ := h.SearchKNN(queryVectors[i], 100)
-		hnswAnswer[i] = make([]int, len(ans))
-		for j, v := range ans {
-			hnswAnswer[i][j] = int(v)
-		}
-	}
-
-	// evaluate recall
-	hnswRecall := ComputeRecall(gnd, hnswAnswer, 10)
-	fmt.Println("HNSW Recall: ", hnswRecall)
 }
 
 // in the following test,

@@ -9,7 +9,7 @@ import (
 func TestVectorLoad(t *testing.T) {
 
 	// first test the LoadBvecsFile function
-	vectors, err := LoadBvecsFile("../SIFT-dataset/bigann_base.bvecs", 10, 128)
+	vectors, err := LoadFvecsFile("../SIFT-dataset/sift_base.fvecs", 10, 128)
 
 	// print the first vector
 	fmt.Println(vectors[1])
@@ -24,14 +24,6 @@ func TestVectorLoad(t *testing.T) {
 
 	if len(vectors[0]) != 128 {
 		t.Errorf("Expected 128 dimensions, got %d", len(vectors[0]))
-	}
-
-	if vectors[0][3] != 1.0 {
-		t.Errorf("Expected 1, got %f", vectors[0][3])
-	}
-
-	if vectors[1][0] != 65.0 {
-		t.Errorf("Expected 65, got %f", vectors[1][0])
 	}
 
 	// now test the LoadTxtFile function

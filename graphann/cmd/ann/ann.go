@@ -83,7 +83,7 @@ func main() {
 	} else {
 		fmt.Println("Building graph")
 		start := time.Now()
-		graph = graphann.BuildGraph(n, d, m, vectors, workingDir, dataset)
+		graph = graphann.BuildGraph(m, vectors, workingDir, dataset)
 		end := time.Now()
 		graphann.SaveGraphToFile(graphFile, graph)
 		fmt.Println("Graph built and saved to file. Time = ", end.Sub(start))
