@@ -61,15 +61,15 @@ func TestBuildGraphAndSearch(t *testing.T) {
 	dim := 128
 	m := 32
 
-	savepath := "/home/mingxunz/Private-Search/SIFT-dataset/"
-	dataset := "bigann_base"
+	savepath := "/root/opensource/private-search-temp/SIFT-dataset/"
+	dataset := "sift_base"
 	outputPrefix := dataset + "_" + strconv.Itoa(n) + "_" + strconv.Itoa(dim) + "_" + strconv.Itoa(m)
 	fmt.Printf("Dataset: %s, Prefix :%s\n", dataset, outputPrefix)
-	inputFile := savepath + "/" + dataset + ".bvecs"
+	inputFile := savepath + "/" + dataset + ".fvecs"
 	graphFile := savepath + outputPrefix + "_graph.npy"
 
 	// Load vectors from file
-	vectors, err := LoadBvecsFile(inputFile, n, dim)
+	vectors, err := LoadFvecsFile(inputFile, n, dim)
 	if err != nil {
 		fmt.Printf("Failed to load vectors from file: %v\n", err)
 		t.Fatal(err)
@@ -104,17 +104,17 @@ func TestSearchQuality(t *testing.T) {
 	m := 32
 	q := 1000
 
-	savepath := "/home/mingxunz/Private-Search/SIFT-dataset/"
-	dataset := "bigann_base"
+	savepath := "/root/opensource/private-search-temp/SIFT-dataset/"
+	dataset := "sift_base"
 	outputPrefix := dataset + "_" + strconv.Itoa(n) + "_" + strconv.Itoa(dim) + "_" + strconv.Itoa(m)
 	fmt.Printf("Dataset: %s, Prefix :%s\n", dataset, outputPrefix)
-	inputFile := savepath + "/" + dataset + ".bvecs"
+	inputFile := savepath + "/" + dataset + ".fvecs"
 	graphFile := savepath + outputPrefix + "_graph.npy"
-	queryFile := savepath + "bigann_query.bvecs"
-	gndFile := savepath + "gnd/idx_1M.ivecs"
+	queryFile := savepath + "sift_base.fvecs"
+	gndFile := savepath + "sift_groundtruth.ivecs"
 
 	// Load vectors from file
-	vectors, err := LoadBvecsFile(inputFile, n, dim)
+	vectors, err := LoadFvecsFile(inputFile, n, dim)
 	if err != nil {
 		fmt.Printf("Failed to load vectors from file: %v\n", err)
 		t.Fatal(err)
@@ -154,7 +154,7 @@ func TestSearchQuality(t *testing.T) {
 	frontend.Preprocess()
 
 	// Load query vectors
-	queryVectors, err := LoadBvecsFile(queryFile, q, dim)
+	queryVectors, err := LoadFvecsFile(queryFile, q, dim)
 	if err != nil {
 		fmt.Printf("Failed to load query vectors from file: %v\n", err)
 	}
